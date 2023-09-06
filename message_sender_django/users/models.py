@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser, UUIDMixin):
     first_name = models.CharField(max_length=150)
-    token = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    telegram_token = models.CharField(max_length=255, unique=True, null=True, blank=True)
 
     REQUIRED_FIELDS = ['first_name']
 

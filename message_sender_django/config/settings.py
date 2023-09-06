@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,6 +21,8 @@ INSTALLED_APPS = [
     'djoser',
 
     'users',
+    'telegram_messages',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -99,5 +102,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    'AUTH_HEADER_TYPES': ('JWT',),
 }
