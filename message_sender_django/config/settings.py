@@ -106,3 +106,8 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     'AUTH_HEADER_TYPES': ('JWT',),
 }
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+
+TELEGRAM_BOT_TOKEN = ''

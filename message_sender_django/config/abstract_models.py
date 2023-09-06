@@ -8,11 +8,3 @@ class UUIDMixin(models.Model):
 
     class Meta:
         abstract = True
-
-
-class TimeStampedMixin(models.Model):
-    created_date = models.DateTimeField('creation date', auto_now_add=True)
-    modified_date = models.DateTimeField('modification date', auto_now=True)
-
-    class Meta:
-        abstract = True
