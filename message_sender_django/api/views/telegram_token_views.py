@@ -1,5 +1,7 @@
 import secrets
 
+from config import settings
+
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -25,7 +27,11 @@ class TelegramTokenView(APIView):
         token: str | None = user.telegram_token
         if not token:
             token: str = _generate_new_telegram_token_to_user(user)
-        return Response(data={'telegram_token': token}, status=status.HTTP_200_OK)
+        data = {
+            'telegram_token': token,
+            'send_token_to_telegram_bot': settings.TELEGRAM_BOT_USERNAME,
+        }
+        return Response(data=data, status=status.HTTP_200_OK)
 
 
 class RefreshTelegramTokenView(APIView):
@@ -34,4 +40,8 @@ class RefreshTelegramTokenView(APIView):
     def patch(self, request: Request):
         user: CustomUser = request.user
         token: str = _generate_new_telegram_token_to_user(user)
-        return Response(data={'telegram_token': token}, status=status.HTTP_200_OK)
+        data = {
+            'telegram_token': token,
+            'send_token_to_telegram_bot': settings.TELEGRAM_BOT_USERNAME,
+        }
+        return Response(data=data, status=status.HTTP_200_OK)

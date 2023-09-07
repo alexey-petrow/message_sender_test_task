@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - /var/lib/postgresql/data/
+    env_file: .env
+
+  redis:
+    image: redis:latest
+
+  telegram_bot:
+    build: ../telegram_bot
+    restart: always
+    depends_on:
+      - redis
+    env_file: .env
+
+  django_api:
+    build: ../message_sender_django
+    restart: always
+    volumes:
+      - static_value:/app/static/
+    depends_on:
+      - db
+    env_file: .env
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_value:/var/html/static/
+    depends_on:
+      - django_api
+
+volumes:
+  static_value:
