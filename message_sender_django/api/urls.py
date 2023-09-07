@@ -3,9 +3,11 @@ from api.views.telegram_token_views import TelegramTokenView, RefreshTelegramTok
 from api.views.message_views import MessageView
 
 v1_urls = [
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     path('get_telegram_token/', TelegramTokenView.as_view()),
     path('refresh_telegram_token/', RefreshTelegramTokenView.as_view()),
-    path('message/', MessageView.as_view())
+    path('message/', MessageView.as_view()),
 ]
 
 urlpatterns = [
