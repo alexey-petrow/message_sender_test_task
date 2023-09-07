@@ -30,7 +30,6 @@ class TelegramTokenView(APIView):
 
 class RefreshTelegramTokenView(APIView):
     permission_classes = [IsAuthenticated]
-    # TODO: need to add throttling
 
     def patch(self, request: Request):
         user: CustomUser = request.user

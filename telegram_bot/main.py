@@ -30,6 +30,11 @@ async def shutdown(dp: Dispatcher):
     await redis.close()
 
 
+@dp.message_handler(commands=['start'])
+async def accept_token(message: types.Message):
+    await message.reply('Hello! Send your token pls.')
+
+
 @dp.message_handler()
 async def echo(message: types.Message):
     token = message.text
